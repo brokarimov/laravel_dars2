@@ -11,6 +11,4 @@ Route::get('/about', function () {
 Route::get('/servis', function () {
     return view('servis');
 });
-Route::get('/contact', function () {
-    return view('contact');
-});
+
