@@ -1,82 +1,66 @@
 <?php
 
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+// admin
+Route::get('/',[AdminController::class, 'index']);
+Route::get('/index3',[AdminController::class, 'index3']);
+Route::get('/index2',[AdminController::class, 'index2']);
+Route::get('/widgets',[AdminController::class, 'widgets']);
+Route::get('/calendar',[AdminController::class, 'calendar']);
+Route::get('/gallery',[AdminController::class, 'gellery']);
+Route::get('/kanban',[AdminController::class, 'kanban']);
+Route::get('/topNav',[AdminController::class, 'topNav']);
+Route::get('/boxed',[AdminController::class, 'boxed']);
+Route::get('/chartJS',[AdminController::class, 'chartJS']);
+Route::get('/flot',[AdminController::class, 'flot']);
+Route::get('/inline',[AdminController::class, 'inline']);
+Route::get('/uplot',[AdminController::class, 'uplot']);
+Route::get('/buttons',[AdminController::class, 'buttons']);
+Route::get('/general',[AdminController::class, 'general']);
+Route::get('/icons',[AdminController::class, 'icons']);
+Route::get('/sliders',[AdminController::class, 'sliders']);
+Route::get('/general_elem',[AdminController::class, 'general_elem']);
+Route::get('/advanced',[AdminController::class, 'advanced']);
+Route::get('/validation',[AdminController::class, 'validation']);
+Route::get('/simple',[AdminController::class, 'simple']);
+Route::get('/data',[AdminController::class, 'data']);
+Route::get('/jsgrid',[AdminController::class, 'jsgrid']);
 
-Route::get('/', function () {
-    return view('index');
-});
-Route::get('/index3', function () {
-    return view('index3');
-});
-Route::get('/index2', function () {
-    return view('index2');
-});
-Route::get('/widgets', function () {
-    return view('pages/widgets');
-});
+// User
+Route::get('/home1',[UserController::class, 'home1']);
+Route::get('/home2',[UserController::class, 'home2']);
+Route::get('/home3',[UserController::class, 'home3']);
+Route::get('/gridProducts',[UserController::class, 'gridProducts']);
+Route::get('/gridLeftSideBar',[UserController::class, 'gridLeftSideBar']);
+Route::get('/gridBannerSlider',[UserController::class, 'gridBannerSlider']);
+Route::get('/listProducts',[UserController::class, 'listProducts']);
+Route::get('/shoppingCart',[UserController::class, 'shoppingCart']);
+Route::get('/checkout',[UserController::class, 'checkout']);
+Route::get('/Contact',[UserController::class, 'Contact']);
+Route::get('/login',[UserController::class, 'login']);
+Route::get('/gridBlog',[UserController::class, 'gridBlog']);
+Route::get('/blogList',[UserController::class, 'blogList']);
+Route::get('/blogLeftSideBar',[UserController::class, 'blogLeftSideBar']);
+Route::get('/blogRightSideBar',[UserController::class, 'blogRightSideBar']);
+Route::get('/about',[UserController::class, 'about']);
 
-Route::get('/calendar', function () {
-    return view('pages/calendar');
-});
-Route::get('/gallery', function () {
-    return view('pages/gallery');
-});
 
-Route::get('/kanban', function () {
-    return view('pages/kanban');
-});
 
-Route::get('/topNav', function () {
-    return view('pages/layout/topNav');
-});
-Route::get('/boxed', function () {
-    return view('pages/layout/boxed');
-});
-Route::get('/chartJS', function () {
-    return view('pages/charts/chartJS');
-});
-Route::get('/flot', function () {
-    return view('pages/charts/flot');
-});
-Route::get('/inline', function () {
-    return view('pages/charts/inline');
-});
-Route::get('/uplot', function () {
-    return view('pages/charts/uplot');
-});
 
-Route::get('/buttons', function () {
-    return view('pages/UI/buttons');
-});
 
-Route::get('/general', function () {
-    return view('pages/UI/general');
-});
-Route::get('/icons', function () {
-    return view('pages/UI/icons');
-});
 
-Route::get('/sliders', function () {
-    return view('pages/UI/sliders');
-});
 
-Route::get('/general_elem', function () {
-    return view('pages/Forms/general_elem');
-});
-Route::get('/advanced', function () {
-    return view('pages/Forms/advanced');
-});
 
-Route::get('/validation', function () {
-    return view('pages/Forms/validation');
-});
-Route::get('/simple', function () {
-    return view('pages/tables/simple');
-});
 
-Route::get('/data', function () {
-    return view('pages/tables/data');
-});
-Route::get('/jsgrid', function () {
-    return view('pages/tables/jsgrid');
-});
+
+
+
+
+
+
+
+
+
+
