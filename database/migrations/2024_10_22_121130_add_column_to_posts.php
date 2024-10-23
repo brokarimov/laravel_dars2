@@ -11,8 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->string('status');
+        Schema::table('posts', function (Blueprint $table) {
+            $table->string('likes');
+            $table->string('dislikes');
         });
     }
 
@@ -21,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->string('status');
-            
+        Schema::table('posts', function (Blueprint $table) {
+            $table->string('likes');
+            $table->string('dislikes');
         });
     }
 };

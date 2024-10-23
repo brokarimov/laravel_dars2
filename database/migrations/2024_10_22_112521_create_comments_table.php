@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn('image');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->id();
+            $table->text('text');
+            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->string('image');
-        });
+        Schema::dropIfExists('comments');
     }
 };

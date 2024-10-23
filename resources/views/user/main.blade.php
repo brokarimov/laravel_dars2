@@ -59,7 +59,7 @@
 					</div>
 					<ul class="header-user-links">
 						<li>
-							<a href="login.html">Login or Register</a>
+							<a href="/login">Login or Register</a>
 						</li>
 					</ul>
 				</div>
