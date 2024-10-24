@@ -28,8 +28,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
-                        
+                    <a href="/category-create" class="btn btn-primary">Create</a>
+
+                    <div class="card mt-2">
+
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -37,6 +39,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -44,10 +47,19 @@
                                         <tr>
                                             <td>{{$category['id']}}</td>
                                             <td>{{$category['name']}}</td>
+                                            <td>
+                                                <a href="/category-show/{{$category->id}}" class="btn btn-primary">Show</a>
+
+                                                <form action="/category/{{$category->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                
+
                             </table>
                         </div>
                         <!-- /.card-body -->

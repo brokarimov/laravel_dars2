@@ -28,7 +28,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <a href="/like-create" class="btn btn-primary">Create</a>
+
+                    <div class="card mt-2">
 
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -39,6 +41,7 @@
                                         <th>Like or Dislike</th>
                                         <th>User</th>
                                         <th>Post ID</th>
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,7 +62,23 @@
                                                 @endif
                                             @endforeach
                                             </td>
-                                            <td>{{$like['post_id']}}</td>
+
+                                            <td>
+                                                @foreach ($posts as $post)
+                                                    @if ($post->id == $like->post_id)
+                                                        {{$post->title}}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                <a href="/like-show/{{$like->id}}" class="btn btn-primary">Show</a>
+
+                                                <form action="/like/{{$like->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

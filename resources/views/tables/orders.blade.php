@@ -28,7 +28,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <a href="/order-create" class="btn btn-primary">Create</a>
+
+                    <div class="card mt-2">
 
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -41,6 +43,7 @@
                                         <th>Owners</th>
                                         <th>Count</th>
                                         <th>Status</th>
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -75,6 +78,15 @@
                                                 @elseif($order['status'] == 0)
                                                     Inactive
                                                 @endif
+                                            </td>
+                                            <td>
+                                                <a href="/order-show/{{$order->id}}" class="btn btn-primary">Show</a>
+
+                                                <form action="/order/{{$order->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                                </form>
                                             </td>
                                         </tr>
                                     @endforeach

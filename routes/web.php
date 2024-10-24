@@ -16,6 +16,52 @@ Route::get('/products',[ProductController::class, 'products']);
 Route::get('/orders',[ProductController::class, 'orders']);
 
 
+Route::get('/category-create',[CategoryController::class, 'category_create']);
+Route::post('/create',[CategoryController::class, 'store']);
+Route::delete('/category/{id}',[CategoryController::class, 'delete']);
+Route::get('/category-show/{id}',[CategoryController::class, 'show']);
+
+
+Route::get('/user-create',[UserController::class, 'user_create']);
+Route::post('/create-user',[UserController::class, 'store']);
+Route::delete('/user/{id}',[UserController::class, 'delete']);
+Route::get('/user-show/{id}',[UserController::class, 'show']);
+
+
+
+Route::get('/post-create',[PostsController::class, 'post_create']);
+Route::post('/create-post',[PostsController::class, 'store']);
+Route::delete('/post/{id}',[PostsController::class, 'delete']);
+Route::get('/post-show/{id}',[PostsController::class, 'show']);
+
+
+
+Route::get('/comment-create',[PostsController::class, 'comment_create']);
+Route::post('/create-comment',[PostsController::class, 'comment_store']);
+Route::delete('/comment/{id}',[PostsController::class, 'delete_comment']);
+Route::get('/comment-show/{id}',[PostsController::class, 'show_comment']);
+
+
+
+Route::get('/like-create',[PostsController::class, 'like_create']);
+Route::post('/create-like',[PostsController::class, 'like_store']);
+Route::delete('/like/{id}',[PostsController::class, 'delete_like']);
+Route::get('/like-show/{id}',[PostsController::class, 'show_like']);
+
+
+
+Route::get('/product-create',[ProductController::class, 'product_create']);
+Route::post('/create-product',[ProductController::class, 'product_store']);
+Route::delete('/product/{id}',[ProductController::class, 'delete']);
+Route::get('/product-show/{id}',[ProductController::class, 'show']);
+
+
+Route::get('/order-create',[ProductController::class, 'order_create']);
+Route::post('/order-product',[ProductController::class, 'order_store']);
+Route::delete('/order/{id}',[ProductController::class, 'delete_order']);
+Route::get('/order-show/{id}',[ProductController::class, 'show_order']);
+
+
 
 
 

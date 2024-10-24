@@ -28,7 +28,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <a href="/comment-create" class="btn btn-primary">Create</a>
+
+                    <div class="card mt-2">
 
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -38,7 +40,7 @@
                                         <th>Id</th>
                                         <th>Comment</th>
                                         <th>Post_id</th>
-                                        
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,7 +48,23 @@
                                         <tr>
                                             <td>{{$comment['id']}}</td>
                                             <td class="truncate-cell">{{$comment['text']}}</td>
-                                            <td>{{$comment['post_id']}}</td>
+
+                                            <td>
+                                                @foreach ($posts as $post)
+                                                    @if ($post->id == $comment->post_id)
+                                                        {{$post->title}}
+                                                    @endif
+                                                @endforeach
+                                            </td>
+                                            <td>
+                                                <a href="/comment-show/{{$comment->id}}" class="btn btn-primary">Show</a>
+
+                                                <form action="/comment/{{$comment->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

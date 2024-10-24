@@ -28,7 +28,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                <a href="/user-create" class="btn btn-primary">Create</a>
+                    <div class="card mt-2">
                         
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -38,6 +39,7 @@
                                         <th>Id</th>
                                         <th>Name</th>
                                         <th>Email</th>
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -46,6 +48,14 @@
                                             <td>{{$user['id']}}</td>
                                             <td>{{$user['name']}}</td>
                                             <td>{{$user['email']}}</td>
+                                            <td>
+                                                <a href="/user-show/{{$user->id}}" class="btn btn-primary">Show</a>
+                                                <form action="/user/{{$user->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

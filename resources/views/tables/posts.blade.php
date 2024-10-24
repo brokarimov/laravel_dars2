@@ -28,7 +28,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <a href="/post-create" class="btn btn-primary">Create</a>
+
+                    <div class="card mt-2">
 
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -41,6 +43,7 @@
                                         <th>Text</th>
                                         <th>Likes</th>
                                         <th>Dislikes</th>
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -58,7 +61,15 @@
                                             <td class="truncate-cell">{{$post['body']}}</td>
                                             <td>{{$post['likes']}}</td>
                                             <td>{{$post['dislikes']}}</td>
+                                            <td>
+                                                <a href="/post-show/{{$post->id}}" class="btn btn-primary">Show</a>
 
+                                                <form action="/post/{{$post->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>

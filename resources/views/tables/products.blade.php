@@ -28,7 +28,9 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <a href="/product-create" class="btn btn-primary">Create</a>
+
+                    <div class="card mt-2">
 
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -42,6 +44,7 @@
                                         <th>Price</th>
                                         <th>Images</th>
                                         <th>Count</th>
+                                        <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -66,6 +69,15 @@
                                             <td>${{$product['price']}}</td>
                                             <td>{{$product['images']}}</td>
                                             <td>{{$product['count']}}</td>
+                                            <td>
+                                                <a href="/product-show/{{$product->id}}" class="btn btn-primary">Show</a>
+
+                                                <form action="/product/{{$product->id}}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger">DELETE</button>
+                                                </form>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
