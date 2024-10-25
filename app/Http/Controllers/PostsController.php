@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CommentStoreRequest;
+use App\Http\Requests\LikeStoreRequest;
+use App\Http\Requests\PostStoreRequest;
 use App\Models\Category;
 use App\Models\Like;
 use App\Models\Post;
@@ -17,14 +20,14 @@ class PostsController extends Controller
     {
         $posts = Post::all();
         $categories = Category::all();
-        
-        return view('tables/posts', ['posts'=>$posts, 'categories'=>$categories]);
+
+        return view('tables/posts', ['posts' => $posts, 'categories' => $categories]);
     }
     public function comments()
     {
         $comments = Comment::all();
         $posts = Post::all();
-        return view('tables/comments', ['posts'=>$posts,'comments'=>$comments]);
+        return view('tables/comments', ['posts' => $posts, 'comments' => $comments]);
     }
     public function likes()
     {
@@ -32,49 +35,50 @@ class PostsController extends Controller
         $users = User::all();
         $posts = Post::all();
 
-        return view('tables/likes', ['posts'=>$posts,'likes'=>$likes, 'users'=>$users]);
+        return view('tables/likes', ['posts' => $posts, 'likes' => $likes, 'users' => $users]);
     }
 
 
     public function post_create()
     {
         $categories = Category::all();
-        return view('tables.createPages.post-create', ['categories'=>$categories]);
+        return view('tables.createPages.post-create', ['categories' => $categories]);
     }
-    
-    public function store(Request $request)
+
+    public function store(PostStoreRequest $request)
     {
-        $request->validate([
-            'title'=>'required|max:255',
-            'category_id'=>'required|exists:categories,id',
-            'body'=>'required|max:255',
-            'likes'=>'required|max:255',
-            'dislikes'=>'required|max:255',
-        ]);
+        // dd($request->all());
+        
+        
         $data = $request->all();
+
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $extension = $file->getClientOriginalExtension();
+            $filename = date('Y-m-d') . '_' . time() . '.' . $extension;
+            $file->move('image_upload/', $filename);
+            $data['image'] = 'image_upload/' . $filename;
+        }
+        // dd($data);
         Post::create($data);
-        return redirect('/posts');
+        return redirect('/posts')->with('success', 'Ma\'lumot qo\'shildi!');
     }
 
 
     public function comment_create()
     {
-        
+
         $posts = Post::all();
-        return view('tables.createPages.comment-create', ['posts'=>$posts]);
+        return view('tables.createPages.comment-create', ['posts' => $posts]);
     }
-    
-    public function comment_store(Request $request)
+
+    public function comment_store(CommentStoreRequest $request)
     {
-        $request->validate([
-            'text'=>'required|max:255',
-            'post_id'=>'required|exists:categories,id',
-            
-        ]);
         
+
         $data = $request->all();
         Comment::create($data);
-        return redirect('/comments');
+        return redirect('/comments')->with('success', 'Ma\'lumot qo\'shildi!');
     }
 
     public function like_create()
@@ -82,57 +86,51 @@ class PostsController extends Controller
         $posts = Post::all();
         $users = User::all();
 
-        return view('tables.createPages.like-create', ['posts'=>$posts, 'users'=>$users]);
+        return view('tables.createPages.like-create', ['posts' => $posts, 'users' => $users]);
     }
-    
-    public function like_store(Request $request)
+
+    public function like_store(LikeStoreRequest $request)
     {
-        $request->validate([
-            'post_id'=>'required|exists:categories,id',
-            'user_id'=>'required|exists:categories,id',
-            'is_active'=>'required|max:255'
-            
-        ]);
+        
         $data = $request->all();
         Like::create($data);
-        return redirect('/likes');
+        return redirect('/likes')->with('success', 'Ma\'lumot qo\'shildi!');
     }
 
     public function delete($id)
     {
         $post = Post::find($id);
         $post->delete();
-        return redirect('/posts');
+        return redirect('/posts')->with('danger', 'Ma\'lumot o\'chirildi!');
     }
     public function delete_comment($id)
     {
         $comment = Comment::find($id);
         $comment->delete();
-        return redirect('/comments');
+        return redirect('/comments')->with('danger', 'Ma\'lumot o\'chirildi!');
     }
     public function delete_like($id)
     {
         $like = Like::find($id);
         $like->delete();
-        return redirect('/likes');
+        return redirect('/likes')->with('danger', 'Ma\'lumot o\'chirildi!');
     }
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::find($id);
-        
-        return view('tables.showPages.post-show', ['post'=>$post]);
+        // dd($post);
+        return view('tables.showPages.post-show', ['post' => $post]);
     }
     public function show_comment($id)
     {
         $comment = Comment::find($id);
         $post = Post::find($comment->post_id);
-        return view('tables.showPages.comment-show', ['post'=>$post,'comment'=>$comment]);
+        return view('tables.showPages.comment-show', ['post' => $post, 'comment' => $comment]);
     }
     public function show_like($id)
     {
         $like = Like::find($id);
         $post = Post::find($like->post_id);
         $user = User::find($like->user_id);
-        return view('tables.showPages.like-show', ['user'=>$user,'post'=>$post,'like'=>$like]);
+        return view('tables.showPages.like-show', ['user' => $user, 'post' => $post, 'like' => $like]);
     }
 }

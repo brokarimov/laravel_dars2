@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\UserStoreRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -19,28 +21,23 @@ class UserController extends Controller
         return view('tables.createPages.user-create');
     }
 
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
         // dd($request->all());
-        $request->validate([
-            'name'=>'required|max:255',
-            'email'=>'required|max:255',
-            'password'=>'required|max:255',
-
-        ]);
+        
         $user = new User();
         $user->name=$request->name;
         $user->email=$request->email;
         $user->password = $request->password;
         $user->save();
-        return redirect('/');
+        return redirect('/')->with('success', 'Ma\'lumot qo\'shildi!');
     }
 
     public function delete($id)
     {
         $user = User::find($id);
         $user->delete();
-        return redirect('/');
+        return redirect('/')->with('danger', 'Ma\'lumot o\'chirildi!');
     }
 
     public function show($id)

@@ -6,8 +6,10 @@
 <div class="content-wrapper">
 
     <div class="container-fluid">
-        <a href="/products" class="btn btn-primary mt-2">Products</a>
-
+        <a href="/products" class="btn btn-primary mt-2">Products</a><br>
+        
+        <img class="mt-2" src="{{asset($product->images)}}" width="200px" alt="">
+        
         <h1>ID: {{ $product->id}}</h1>
         <h1>Product: {{$product->name}}</h1>
         <h2>Category: {{$category->name}}</h2>

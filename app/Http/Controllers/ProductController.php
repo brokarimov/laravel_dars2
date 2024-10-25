@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\OrderStoreRequest;
+use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\ProductStoreRequest;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
@@ -39,20 +42,19 @@ class ProductController extends Controller
         return view('tables.createPages.product-create', ['users'=>$users, 'categories'=>$categories]);
     }
     
-    public function product_store(Request $request)
+    public function product_store(ProductStoreRequest $request)
     {
-        $request->validate([
-            'name'=>'required|max:255',
-            'category_id'=>'required|exists:categories,id',
-            'user_id'=>'required|exists:categories,id',
-            'price'=>'required|max:255',
-            'images'=>'required|max:255',
-            'count'=>'required|max:255',
-
-        ]);
+        
         $data = $request->all();
+        if ($request->hasFile('images')) {
+            $file = $request->file('images');
+            $extension = $file->getClientOriginalExtension();
+            $filename = date('Y-m-d') . '_' . time() . '.' . $extension;
+            $file->move('image_upload/', $filename);
+            $data['images'] = 'image_upload/' . $filename;
+        }
         Product::create($data);
-        return redirect('/products');
+        return redirect('/products')->with('success', 'Ma\'lumot qo\'shildi!');
     }
 
     public function order_create()
@@ -63,37 +65,29 @@ class ProductController extends Controller
         return view('tables.createPages.order-create', ['users'=>$users, 'products'=>$products]);
     }
     
-    public function order_store(Request $request)
+    public function order_store(OrderStoreRequest $request)
     {
-        $request->validate([
-            'user_id'=>'required|exists:users,id',
-            'owner_id'=>'required|exists:users,id',
-            'product_id'=>'required|exists:products,id',
-            'count'=>'required|max:255',
-            'status'=>'required',
-
-
-        ]);
+        
         $data = $request->all();
         Order::create($data);
-        return redirect('/orders');
+        return redirect('/orders')->with('success', 'Ma\'lumot qo\'shildi!');
     }
 
     public function delete($id)
     {
         $product = Product::find($id);
         $product->delete();
-        return redirect('/products');
+        return redirect('/products')->with('danger', 'Ma\'lumot o\'chirildi!');
     }
     public function delete_order($id)
     {
         $order = Order::find($id);
         $order->delete();
-        return redirect('/orders');
+        return redirect('/orders')->with('danger', 'Ma\'lumot o\'chirildi!');
     }
-    public function show($id)
+    public function show(Product $product)
     {
-        $product = Product::find($id);
+        
         $category = Category::find($product->category_id);
         $user = User::find($product->user_id);
         return view('tables.showPages.product-show', ['category'=>$category,'user'=>$user,'product'=>$product]);

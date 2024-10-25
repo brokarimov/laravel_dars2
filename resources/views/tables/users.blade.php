@@ -28,9 +28,20 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                <a href="/user-create" class="btn btn-primary">Create</a>
+                    @if (session('danger'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{session('danger')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @elseif(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{session('success')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    <a href="/user-create" class="btn btn-primary">Create</a>
                     <div class="card mt-2">
-                        
+
                         <!-- /.card-header -->
                         <div class="card-body">
                             <table id="example1" class="table table-bordered table-striped">
@@ -59,7 +70,7 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                
+
                             </table>
                         </div>
                         <!-- /.card-body -->

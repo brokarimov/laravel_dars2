@@ -1,7 +1,7 @@
 @extends('./admin/main')
 
 
-@section('title', 'Comments')
+@section('title', 'Companies')
 
 @section('content')
 
@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Comments</h1>
+                    <h1>Companies</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Comments</li>
+                        <li class="breadcrumb-item active">Companies</li>
                     </ol>
                 </div>
             </div>
@@ -39,8 +39,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <a href="/comment-create" class="btn btn-primary">Create</a>
-
+                    <a href="/company-create" class="btn btn-primary">Create</a>
                     <div class="card mt-2">
 
                         <!-- /.card-header -->
@@ -49,28 +48,30 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Comment</th>
-                                        <th>Post_id</th>
+                                        <th>Name</th>
+                                        <th>User</th>
                                         <th>Options</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($comments as $comment)
+                                    @foreach ($companies as $company)
                                         <tr>
-                                            <td>{{$comment['id']}}</td>
-                                            <td class="truncate-cell">{{$comment['text']}}</td>
-
+                                            <td>{{$company['id']}}</td>
+                                            <td>{{$company['name']}}</td>
                                             <td>
-                                                @foreach ($posts as $post)
-                                                    @if ($post->id == $comment->post_id)
-                                                        {{$post->title}}
+                                                @foreach ($users as $user)
+                                                    @if ($company->user2_id == $user->id)
+                                                        {{$user->name}}
                                                     @endif
                                                 @endforeach
                                             </td>
                                             <td>
-                                                <a href="/comment-show/{{$comment->id}}" class="btn btn-primary">Show</a>
-
-                                                <form action="/comment/{{$comment->id}}" method="POST">
+                                                <form action="/product2-create" method="POST">
+                                                    @csrf
+                                                    <input type="hidden" name="company_id" value="{{ $company->id }}">
+                                                    <button type="submit" class="btn btn-primary">Create Product</button>
+                                                </form>
+                                                <form action="/company/{{$company->id}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">DELETE</button>

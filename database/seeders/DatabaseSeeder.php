@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
             CategoriesTableSeeder::class,
             PostsTableSeeder::class,
             CommentTableSeeder::class,
-            LikeTableSeeder::class
+            LikeTableSeeder::class,
+            ProductsTableSeeder::class,
+            OrderTableSeeder::class
         ]);
     }
 }

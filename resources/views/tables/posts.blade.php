@@ -28,6 +28,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+                    @if (session('danger'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{session('danger')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @elseif(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{session('success')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <a href="/post-create" class="btn btn-primary">Create</a>
 
                     <div class="card mt-2">
@@ -43,6 +54,7 @@
                                         <th>Text</th>
                                         <th>Likes</th>
                                         <th>Dislikes</th>
+                                        <th>Image</th>
                                         <th>Options</th>
                                     </tr>
                                 </thead>
@@ -61,6 +73,7 @@
                                             <td class="truncate-cell">{{$post['body']}}</td>
                                             <td>{{$post['likes']}}</td>
                                             <td>{{$post['dislikes']}}</td>
+                                            <td><img src="<?= $post['image'] ?>" width="100px" alt=""></td>
                                             <td>
                                                 <a href="/post-show/{{$post->id}}" class="btn btn-primary">Show</a>
 

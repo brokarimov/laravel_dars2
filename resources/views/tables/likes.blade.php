@@ -28,6 +28,17 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
+                    @if (session('danger'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{session('danger')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @elseif(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{session('success')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <a href="/like-create" class="btn btn-primary">Create</a>
 
                     <div class="card mt-2">

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategorytStoreRequest;
+use App\Http\Requests\PostStoreRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 
@@ -18,22 +20,20 @@ class CategoryController extends Controller
         return view('tables.createPages.category-create');
     }
     
-    public function store(Request $request)
+    public function store(CategorytStoreRequest $request)
     {
-        $request->validate([
-            'name'=>'required|max:255',
-        ]);
+        
         $category = new Category();
         $category->name=$request->name;
         $category->save();
-        return redirect('/categories');
+        return redirect('/categories')->with('success', 'Ma\'lumot qo\'shildi!');
     }
 
     public function delete($id)
     {
         $category = Category::find($id);
         $category->delete();
-        return redirect('/categories');
+        return redirect('/categories')->with('danger', 'Ma\'lumot o\'chirildi!');
     }
     public function show($id)
     {

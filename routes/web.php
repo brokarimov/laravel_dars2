@@ -2,17 +2,26 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\Product2Controller;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\User2Controller;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 // admin
 Route::get('/',[UserController::class, 'users']);
+Route::get('/users2',[User2Controller::class, 'users2']);
+
 Route::get('/categories',[CategoryController::class, 'categories']);
+Route::get('/companies',[CompanyController::class, 'companies']);
+
 Route::get('/posts',[PostsController::class, 'posts']);
 Route::get('/comments',[PostsController::class, 'comments']);
 Route::get('/likes',[PostsController::class, 'likes']);
 Route::get('/products',[ProductController::class, 'products']);
+Route::get('/products2',[Product2Controller::class, 'products2']);
+
 Route::get('/orders',[ProductController::class, 'orders']);
 
 
@@ -32,7 +41,7 @@ Route::get('/user-show/{id}',[UserController::class, 'show']);
 Route::get('/post-create',[PostsController::class, 'post_create']);
 Route::post('/create-post',[PostsController::class, 'store']);
 Route::delete('/post/{id}',[PostsController::class, 'delete']);
-Route::get('/post-show/{id}',[PostsController::class, 'show']);
+Route::get('/post-show/{post}',[PostsController::class, 'show']);
 
 
 
@@ -53,7 +62,7 @@ Route::get('/like-show/{id}',[PostsController::class, 'show_like']);
 Route::get('/product-create',[ProductController::class, 'product_create']);
 Route::post('/create-product',[ProductController::class, 'product_store']);
 Route::delete('/product/{id}',[ProductController::class, 'delete']);
-Route::get('/product-show/{id}',[ProductController::class, 'show']);
+Route::get('/product-show/{product}',[ProductController::class, 'show']);
 
 
 Route::get('/order-create',[ProductController::class, 'order_create']);
@@ -63,50 +72,21 @@ Route::get('/order-show/{id}',[ProductController::class, 'show_order']);
 
 
 
+Route::get('/user2-create',[User2Controller::class, 'user2_create']);
+Route::post('/create-users2',[User2Controller::class, 'store']);
+Route::delete('/users2/{id}',[User2Controller::class, 'delete']);
+Route::get('/user2-show/{user2}',[User2Controller::class, 'show']);
 
+Route::get('/company-create',[CompanyController::class, 'company_create']);
+Route::post('/create-company',[CompanyController::class, 'store']);
+Route::delete('/company/{id}',[CompanyController::class, 'delete']);
+Route::get('/company-show/{company}', [CompanyController::class, 'show']);
 
+Route::post('/product2-create',[Product2Controller::class, 'product2_create']);
+Route::post('/create-product2',[Product2Controller::class, 'store']);
+Route::delete('/product2/{id}',[Product2Controller::class, 'delete']);
+Route::get('/product2-show/{product2}', [Product2Controller::class, 'show']);
 
-
-// Route::get('/index3',[AdminController::class, 'index3']);
-// Route::get('/index2',[AdminController::class, 'index2']);
-// Route::get('/widgets',[AdminController::class, 'widgets']);
-// Route::get('/calendar',[AdminController::class, 'calendar']);
-// Route::get('/gallery',[AdminController::class, 'gellery']);
-// Route::get('/kanban',[AdminController::class, 'kanban']);
-// Route::get('/topNav',[AdminController::class, 'topNav']);
-// Route::get('/boxed',[AdminController::class, 'boxed']);
-// Route::get('/chartJS',[AdminController::class, 'chartJS']);
-// Route::get('/flot',[AdminController::class, 'flot']);
-// Route::get('/inline',[AdminController::class, 'inline']);
-// Route::get('/uplot',[AdminController::class, 'uplot']);
-// Route::get('/buttons',[AdminController::class, 'buttons']);
-// Route::get('/general',[AdminController::class, 'general']);
-// Route::get('/icons',[AdminController::class, 'icons']);
-// Route::get('/sliders',[AdminController::class, 'sliders']);
-// Route::get('/general_elem',[AdminController::class, 'general_elem']);
-// Route::get('/advanced',[AdminController::class, 'advanced']);
-// Route::get('/validation',[AdminController::class, 'validation']);
-// Route::get('/simple',[AdminController::class, 'simple']);
-// Route::get('/data',[AdminController::class, 'data']);
-// Route::get('/jsgrid',[AdminController::class, 'jsgrid']);
-
-// User
-// Route::get('/home1',[UserController::class, 'home1']);
-// Route::get('/home2',[UserController::class, 'home2']);
-// Route::get('/home3',[UserController::class, 'home3']);
-// Route::get('/gridProducts',[UserController::class, 'gridProducts']);
-// Route::get('/gridLeftSideBar',[UserController::class, 'gridLeftSideBar']);
-// Route::get('/gridBannerSlider',[UserController::class, 'gridBannerSlider']);
-// Route::get('/listProducts',[UserController::class, 'listProducts']);
-// Route::get('/shoppingCart',[UserController::class, 'shoppingCart']);
-// Route::get('/checkout',[UserController::class, 'checkout']);
-// Route::get('/Contact',[UserController::class, 'Contact']);
-// Route::get('/login',[UserController::class, 'login']);
-// Route::get('/gridBlog',[UserController::class, 'gridBlog']);
-// Route::get('/blogList',[UserController::class, 'blogList']);
-// Route::get('/blogLeftSideBar',[UserController::class, 'blogLeftSideBar']);
-// Route::get('/blogRightSideBar',[UserController::class, 'blogRightSideBar']);
-// Route::get('/about',[UserController::class, 'about']);
 
 
 
