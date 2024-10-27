@@ -1,6 +1,6 @@
 @extends('.admin.main')
 
-@section('title', 'Create')
+@section('title', 'Update')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Company Create</h1>
+                    <h1>Company Update</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Company Create</li>
+                        <li class="breadcrumb-item active">Company Update</li>
                     </ol>
                 </div>
             </div>
@@ -27,65 +27,61 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
+                    
                     <a href="/companies" class="btn btn-primary">Companies</a>
 
                     <!-- general form elements -->
                     <div class="card card-primary mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">Company Create</h3>
+                            <h3 class="card-title">Company Update</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="/create-company" method="POST">
+                        <form action="/update_company/{{ $company->id }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
-                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Enter name">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        placeholder="Enter name" value="{{ $company->name }}">
                                     @error('name')
-                                        <span class="text-danger">
-                                            {{$message}}<br>
-                                        </span>
+                                        <span class="text-danger">{{ $message }}</span><br>
                                     @enderror
 
-                                    <label for="exampleInputEmail1">Users</label>
+                                    <label for="user_id">Users</label>
                                     <select class="form-control" name="user_id">
                                         @foreach ($users as $user)
-                                            <option value="<?= $user->id ?>"><?= $user->name ?></option>
+                                            <option value="{{ 1 }}">
+                                            
+                                                {{ $user->name }}
+                                            </option>
                                         @endforeach
                                     </select>
-                                    @error('user2_id')
-                                        <span class="text-danger">
-                                            {{$message}}<br>
-                                        </span>
+                                    @error('user_id')
+                                        <span class="text-danger">{{ $message }}</span><br>
                                     @enderror
-
-                                    
                                 </div>
-
                             </div>
                             <!-- /.card-body -->
-
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                         </form>
+                        <!-- /.card -->
+
+                        <!-- general form elements -->
+
+                        <!-- /.card -->
+
                     </div>
-                    <!-- /.card -->
+                    <!--/.col (left) -->
+                    <!-- right column -->
 
-                    <!-- general form elements -->
-
-                    <!-- /.card -->
-
+                    <!--/.col (right) -->
                 </div>
-                <!--/.col (left) -->
-                <!-- right column -->
-
-                <!--/.col (right) -->
-            </div>
-            <!-- /.row -->
-        </div><!-- /.container-fluid -->
+                <!-- /.row -->
+            </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 </div>

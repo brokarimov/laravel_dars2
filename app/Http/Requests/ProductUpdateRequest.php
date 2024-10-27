@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class Product2StoreRequest extends FormRequest
+class ProductUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -17,29 +17,31 @@ class Product2StoreRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array
      */
     public function rules(): array
     {
         return [
-            'name' => 'required',
-
-            'price' => 'required',
-            'image' => 'required|file|mimes:png,jpg,jpeg',
-            'count' => 'required',
+            'name' => 'required|max:255',
+            'price' => 'required|max:255',
+            'count' => 'required|max:255',
+            'image' => 'required|file|mimes:png,jpg,jpeg', // Ensure image is a file with specified mime types
         ];
     }
-    public function messages()
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages(): array
     {
         return [
             'name.required' => 'Name ni to\'ldiring!',
-
             'price.required' => 'Narx topilmadi!',
             'count.required' => 'Count topilmadi!',
-
             'image.required' => 'Rasmni to\'ldiring!',
-            'image.mimes' => 'Rasmni faqat(png, jpg, jpeg) formatida yuboring!',
+            'image.mimes' => 'Rasmni faqat (png, jpg, jpeg) formatida yuboring!',
         ];
     }
-
 }

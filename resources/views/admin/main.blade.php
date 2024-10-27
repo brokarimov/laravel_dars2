@@ -529,75 +529,13 @@
               </ul>
             </li> -->
             <li class="nav-header">EXAMPLES</li>
+            
+
             <li class="nav-item">
               <a href="/" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>
-                  Users
-                  <span class="badge badge-info right"></span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/categories" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Categories
-                  <span class="badge badge-info right"></span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/posts" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Posts
-                  <span class="badge badge-info right"></span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/comments" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Comments
-                  <span class="badge badge-info right"></span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/likes" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Likes
-                  <span class="badge badge-info right"></span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/products" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Products
-                  <span class="badge badge-info right"></span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="/orders" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Orders
-                  <span class="badge badge-info right"></span>
-                </p>
-              </a>
-            </li>
-
-            <li class="nav-item">
-              <a href="/users2" class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  User2
+                  User
                   <span class="badge badge-info right"></span>
                 </p>
               </a>
@@ -615,7 +553,7 @@
               <a href="/products2" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>
-                  Products2
+                  Products
                   <span class="badge badge-info right"></span>
                 </p>
               </a>

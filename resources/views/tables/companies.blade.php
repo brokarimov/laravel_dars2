@@ -41,10 +41,20 @@
                     @endif
                     <a href="/company-create" class="btn btn-primary">Create</a>
                     <div class="card mt-2">
-
+                    <form action="/company-search" method="GET">
+                            @csrf
+                            <div class="input-group col-12 mt-2">
+                                <input type="text" name="search" class="form-control search-bar" id="search-bar" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button name="ok" class="btn btn-primary form-control btn-search">Search</button>
+                                </div>
+                            </div>
+                        </form>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+
+                        
+                            <table id="" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -60,7 +70,7 @@
                                             <td>{{$company['name']}}</td>
                                             <td>
                                                 @foreach ($users as $user)
-                                                    @if ($company->user2_id == $user->id)
+                                                    @if ($company->user_id == $user->id)
                                                         {{$user->name}}
                                                     @endif
                                                 @endforeach
@@ -76,16 +86,23 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">DELETE</button>
                                                 </form>
+
+                                                <a href="/company-update/{{$company->id}}" class="btn btn-warning">Update</a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
 
                             </table>
+
                         </div>
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
+                     <div>
+                     {{ $companies->links() }}
+
+                     </div>
                 </div>
                 <!-- /.col -->
             </div>

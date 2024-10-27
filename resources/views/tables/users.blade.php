@@ -38,13 +38,26 @@
                             {{session('success')}}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
+                    @elseif(session('warning'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{session('warning')}}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
                     @endif
                     <a href="/user-create" class="btn btn-primary">Create</a>
                     <div class="card mt-2">
-
+                        <form action="/user-search" method="GET">
+                            @csrf
+                            <div class="input-group col-12 mt-2">
+                                <input type="text" name="search" class="form-control search-bar" id="search-bar" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button name="ok" class="btn btn-primary form-control btn-search">Search</button>
+                                </div>
+                            </div>
+                        </form>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -61,11 +74,14 @@
                                             <td>{{$user['email']}}</td>
                                             <td>
                                                 <a href="/user-show/{{$user->id}}" class="btn btn-primary">Show</a>
-                                                <form action="/user/{{$user->id}}" method="POST">
+                                                <form action="/users/{{$user->id}}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">DELETE</button>
                                                 </form>
+
+                                                <a href="/user-update/{{$user->id}}" class="btn btn-warning">Update</a>
+
                                             </td>
                                         </tr>
                                     @endforeach
@@ -74,8 +90,13 @@
                             </table>
                         </div>
                         <!-- /.card-body -->
+
                     </div>
                     <!-- /.card -->
+                    <div>
+                        {{ $users->links() }}
+
+                    </div>
                 </div>
                 <!-- /.col -->
             </div>

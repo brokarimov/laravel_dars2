@@ -24,16 +24,22 @@ class UserStoreRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|max:255',
-            'password' => 'required|max:255',
+            'password' => 'required|max:20|min:8',
+            'c_password' => 'required|same:password|max:20|min:8'
 
         ];
     }
     public function messages()
-    {
-        return [
-            'name.required' => 'Name ni to\'ldiring!',
-            'email.required' => 'Email topilmadi!',
-            'password.required' => 'Parol topilmadi!',
-        ];
-    }
+{
+    return [
+        'name.required' => 'Please fill in the Name field.',
+        'email.required' => 'Email field is required.',
+        'password.required' => 'Password field is required.',
+        'password.min' => 'Password must be at least :min characters long.',
+        'password.max' => 'Password must not exceed :max characters.',
+        'c_password.required' => 'Confirmation Password field is required.',
+        'c_password.min' => 'Confirmation Password must be at least :min characters long.',
+        'c_password.max' => 'Confirmation Password must not exceed :max characters.'
+    ];
+}
 }

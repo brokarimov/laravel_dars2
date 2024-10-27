@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostStoreRequest;
 use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 use App\Models\User;
 
@@ -12,7 +13,7 @@ class UserController extends Controller
 {
     public function users()
     {
-        $users = User::all();
+        $users = User::orderBy('id', 'asc')->paginate(2);
         return view('tables/users', ['users' => $users]);
     }
 
@@ -24,27 +25,39 @@ class UserController extends Controller
     public function store(UserStoreRequest $request)
     {
         // dd($request->all());
-        
-        $user = new User();
-        $user->name=$request->name;
-        $user->email=$request->email;
-        $user->password = $request->password;
-        $user->save();
+
+        User::create($request->all());
         return redirect('/')->with('success', 'Ma\'lumot qo\'shildi!');
     }
 
-    public function delete($id)
+    public function delete(User $user)
     {
-        $user = User::find($id);
+        // dd($user);
         $user->delete();
         return redirect('/')->with('danger', 'Ma\'lumot o\'chirildi!');
     }
 
-    public function show($id)
+    public function show(User $user)
     {
-        $user = User::find($id);
-        
-        return view('tables.showPages.user-show', ['user'=>$user]);
+        return view('tables.showPages.user-show', ['user' => $user]);
+    }
+    public function update_user(User $user)
+    {
+        // dd($user);
+        return view('tables.updatePages.user-update',['user'=>$user]);
     }
 
+    public function update(UserUpdateRequest $request, User $user)
+    {
+        
+        $user->update($request->all());
+        return redirect('/')->with('warning', 'Ma\'lumot yangilandi!');
+    }
+
+    public function search(Request $request)
+    {
+        $users = User::where('name','like','%'.$request->search.'%')->orderBy('id', 'asc')->paginate(2);
+        return view('tables/users', ['users' => $users]);
+
+    }
 }

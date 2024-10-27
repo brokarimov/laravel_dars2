@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CompanyStoreRequest extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,21 +21,14 @@ class CompanyStoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'name' => 'required',
-            'user_id' => 'required|exists:users,id',
-        ];
-    }
-    public function messages()
-    {
-        return [
-            'name.required' => 'Name ni to\'ldiring!',
-            
-            'user_id.required' => 'User ni to\'ldiring!',
-            'user_id.exists' => 'User topilmadi!',
-            
+        $user = $this->route('user'); // Retrieve the User model instance from the route
 
-            
+        return [
+            'name' => 'required|max:255',
+            'email' => 'required|unique:users,email,' . $user->id,
+            'password' => 'nullable|min:8|max:20',
+            'c_password' => 'nullable|same:password',
         ];
     }
 }
+

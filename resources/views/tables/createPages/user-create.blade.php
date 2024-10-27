@@ -36,7 +36,7 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="/create-user" method="POST">
+                        <form action="/create-users" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
@@ -59,13 +59,25 @@
                                     @enderror
 
                                     <label for="exampleInputEmail1">Password</label>
-                                    <input type="test" name="password" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Enter password">
+                                    <input type="password" name="password" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Enter Password">
                                     @error('password')
                                         <span class="text-danger">
                                             {{$message}}<br>
                                         </span>
                                     @enderror
+
+
+                                    <label for="exampleInputEmail1">Confirmation password</label>
+                                    <input type="password" name="c_password" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Confirmation password">
+                                    @error('c_password')
+                                        <span class="text-danger">
+                                            {{$message}}<br>
+                                        </span>
+                                    @enderror
+
+                                    
                                 </div>
 
                             </div>

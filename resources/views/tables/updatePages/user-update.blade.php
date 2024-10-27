@@ -1,6 +1,6 @@
 @extends('.admin.main')
 
-@section('title', 'Create')
+@section('title', 'Update')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Company Create</h1>
+                    <h1>User Update</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Company Create</li>
+                        <li class="breadcrumb-item active">User Update</li>
                     </ol>
                 </div>
             </div>
@@ -27,43 +27,50 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
-                    <a href="/companies" class="btn btn-primary">Companies</a>
+
+                    <a href="/" class="btn btn-primary">Users</a>
 
                     <!-- general form elements -->
                     <div class="card card-primary mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">Company Create</h3>
+                            <h3 class="card-title">User Update</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="/create-company" method="POST">
+                        <form action="/update/{{$user->id}}" method="POST">
+                            
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
-                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Enter name">
+                                    <label for="name">Name</label>
+                                    <input type="text" name="name" class="form-control" id="name"
+                                        placeholder="Enter name" value="{{ $user->name }}">
                                     @error('name')
-                                        <span class="text-danger">
-                                            {{$message}}<br>
-                                        </span>
+                                        <span class="text-danger">{{ $message }}</span><br>
                                     @enderror
 
-                                    <label for="exampleInputEmail1">Users</label>
-                                    <select class="form-control" name="user_id">
-                                        @foreach ($users as $user)
-                                            <option value="<?= $user->id ?>"><?= $user->name ?></option>
-                                        @endforeach
-                                    </select>
-                                    @error('user2_id')
-                                        <span class="text-danger">
-                                            {{$message}}<br>
-                                        </span>
+                                    <label for="email">Email</label>
+                                    <input type="email" name="email" class="form-control" id="email"
+                                        placeholder="Enter email" value="{{ $user->email }}">
+                                    @error('email')
+                                        <span class="text-danger">{{ $message }}</span><br>
                                     @enderror
 
-                                    
+                                    <label for="password">Password</label>
+                                    <input type="password" name="password" class="form-control" id="password"
+                                        placeholder="Enter Password">
+                                    @error('password')
+                                        <span class="text-danger">{{ $message }}</span><br>
+                                    @enderror
+
+                                    <label for="c_password">Confirmation password</label>
+                                    <input type="password" name="c_password" class="form-control" id="c_password"
+                                        placeholder="Confirmation password">
+                                    @error('c_password')
+                                        <span class="text-danger">{{ $message }}</span><br>
+                                    @enderror
                                 </div>
-
                             </div>
                             <!-- /.card-body -->
 

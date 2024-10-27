@@ -17,13 +17,6 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->count(10)->create();
 
-        $this->call([
-            CategoriesTableSeeder::class,
-            PostsTableSeeder::class,
-            CommentTableSeeder::class,
-            LikeTableSeeder::class,
-            ProductsTableSeeder::class,
-            OrderTableSeeder::class
-        ]);
+        
     }
 }

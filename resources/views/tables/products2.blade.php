@@ -41,10 +41,18 @@
                     @endif
 
                     <div class="card mt-2">
-
+                    <form action="/product-search" method="GET">
+                            @csrf
+                            <div class="input-group col-12 mt-2">
+                                <input type="text" name="search" class="form-control search-bar" id="search-bar" placeholder="Search">
+                                <div class="input-group-append">
+                                    <button name="ok" class="btn btn-primary form-control btn-search">Search</button>
+                                </div>
+                            </div>
+                        </form>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped">
+                            <table id="" class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
@@ -61,7 +69,7 @@
                                         <tr>
                                             <td>{{$product['id']}}</td>
                                             <td>{{$product['name']}}</td>
-                                            
+
                                             <td>@foreach ($companies as $company)
                                                 @if ($company['id'] == $product['company_id'])
                                                     {{$company['name']}}
@@ -79,14 +87,21 @@
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-danger">DELETE</button>
                                                 </form>
+                                                <a href="/product2-update/{{$product->id}}"
+                                                    class="btn btn-warning">Update</a>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
 
                             </table>
+
+
                         </div>
                         <!-- /.card-body -->
+                    </div>
+                    <div>
+                        {{ $products2->links() }}
                     </div>
                     <!-- /.card -->
                 </div>
