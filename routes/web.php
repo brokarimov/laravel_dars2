@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\MasalliqController;
+use App\Http\Controllers\OvqatController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\Product2Controller;
 use App\Http\Controllers\ProductController;
@@ -11,39 +13,29 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 // admin
 
-Route::get('/', [UserController::class, 'users']);
-Route::get('/user-create', [UserController::class, 'user_create']);
-Route::post('/create-users', [UserController::class, 'store']);
-Route::delete('/users/{user}', [UserController::class, 'delete']);
-Route::get('/user-show/{user}', [UserController::class, 'show']);
-
-Route::get('/user-update/{user}', [UserController::class, 'update_user']);
-Route::put('/update/{user}', [UserController::class, 'update']);
-Route::get('/user-search', [UserController::class, 'search']);
+Route::get('/', [OvqatController::class, 'index']);
+Route::get('/ovqat-create', [OvqatController::class, 'create']);
+Route::post('/create-ovqat', [OvqatController::class, 'store']);
+Route::delete('/ovqat/{ovqat}', [OvqatController::class, 'delete']);
 
 
+Route::get('/ovqat-update/{ovqat}', [OvqatController::class, 'update_ovqat']);
+Route::put('/update/{ovqat}', [OvqatController::class, 'update']);
+Route::get('/ovqat-search', [OvqatController::class, 'search']);
 
 
-Route::get('/companies', [CompanyController::class, 'companies']);
-Route::get('/company-update/{company}', [CompanyController::class, 'update_company']);
-Route::put('/update_company/{com}', [CompanyController::class, 'company_update']);
-Route::get('/company-search', [CompanyController::class, 'search']);
 
-Route::get('/products2', [Product2Controller::class, 'products2']);
-Route::get('/product2-update/{product}', [Product2Controller::class, 'update_product']);
-Route::put('/update_product/{prod}', [Product2Controller::class, 'product_update']);
-Route::get('/product-search', [Product2Controller::class, 'search']);
+Route::get('/masalliq', [MasalliqController::class, 'index']);
+Route::get('/masalliq-create', [MasalliqController::class, 'create']);
+Route::post('/create-masalliq', [MasalliqController::class, 'store']);
+Route::delete('/masalliq/{masalliq}', [MasalliqController::class, 'delete']);
 
 
-Route::get('/company-create', [CompanyController::class, 'company_create']);
-Route::post('/create-company', [CompanyController::class, 'store']);
-Route::delete('/company/{id}', [CompanyController::class, 'delete']);
-Route::get('/company-show/{company}', [CompanyController::class, 'show']);
+Route::get('/masalliq-update/{masalliq}', [MasalliqController::class, 'update_masalliq']);
+Route::put('/update_masalliq/{masalliq}', [MasalliqController::class, 'update']);
+Route::get('/masalliq-search', [MasalliqController::class, 'search']);
 
-Route::post('/product2-create', [Product2Controller::class, 'product2_create']);
-Route::post('/create-product2', [Product2Controller::class, 'store']);
-Route::delete('/product2/{id}', [Product2Controller::class, 'delete']);
-Route::get('/product2-show/{product2}', [Product2Controller::class, 'show']);
+
 
 
 
