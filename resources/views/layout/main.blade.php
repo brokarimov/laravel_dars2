@@ -535,16 +535,25 @@
               <a href="/" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>
-                  Ovqat
+                  University
                   <span class="badge badge-info right"></span>
                 </p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="/masalliq" class="nav-link">
+              <a href="/faculty" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>
-                  Masalliq
+                  Faculty
+                  <span class="badge badge-info right"></span>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/major" class="nav-link">
+                <i class="nav-icon far fa-calendar-alt"></i>
+                <p>
+                  Major
                   <span class="badge badge-info right"></span>
                 </p>
               </a>

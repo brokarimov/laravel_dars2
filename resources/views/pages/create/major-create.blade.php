@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Update')
+@section('title', 'Create')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Ovqat Update</h1>
+                    <h1>Major Create</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Ovqat Update</li>
+                        <li class="breadcrumb-item active">Major Create</li>
                     </ol>
                 </div>
             </div>
@@ -27,40 +27,47 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
-
-                    <a href="/" class="btn btn-primary">Ovqatlar</a>
+                    <a href="/major" class="btn btn-primary">Majors</a>
 
                     <!-- general form elements -->
                     <div class="card card-primary mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">Ovqat Update</h3>
+                            <h3 class="card-title">Major Create</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="/update/{{$ovqat->id}}" method="POST">
-
+                        <form action="/create-major" method="POST">
                             @csrf
-                            @method('PUT')
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="name">Name</label>
-                                    <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Enter name" value="{{ $ovqat->name }}">
+                                    <label for="exampleInputEmail1">Name</label>
+                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Enter name">
                                     @error('name')
-                                        <span class="text-danger">{{ $message }}</span><br>
+                                        <span class="text-danger">
+                                            {{$message}}<br>
+                                        </span>
                                     @enderror
 
-                                    @foreach ($models as $model)
-                                        <input class="" type="checkbox" name="ids[]" value="{{$model->id }}" id="mas{{$model->id}}">
-                                        <label for="mas{{$model->id}}">{{$model->name}}</label><br>
-
-                                    @endforeach
-                                    @error('ids')
+                                    <label for="exampleInputEmail1">Faculties</label>
+                                    <select class="form-control" name="faculty_id">
+                                        @foreach ($faculties as $faculty)
+                                            <option value="{{ $faculty->id }}">{{ $faculty->name }} -
+                                                @foreach ($universities as $university)
+                                                    @if($faculty->university_id == $university->id)
+                                                        {{ $university->name }}
+                                                    @endif
+                                                @endforeach
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                    @error('faculty_id')
                                         <span class="text-danger">
                                             {{$message}}<br>
                                         </span>
                                     @enderror
                                 </div>
+
                             </div>
                             <!-- /.card-body -->
 

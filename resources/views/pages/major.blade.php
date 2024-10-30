@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 
-@section('title', 'Masalliq')
+@section('title', 'Major')
 
 @section('content')
 
@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Masalliq</h1>
+                    <h1>Major</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Masalliq</li>
+                        <li class="breadcrumb-item active">Major</li>
                     </ol>
                 </div>
             </div>
@@ -44,12 +44,12 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <a href="/masalliq-create" class="btn btn-primary">Create</a>
+                    <a href="/major-create" class="btn btn-primary">Create</a>
                     <div class="card mt-2">
 
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="/masalliq-search" method="GET">
+                            <form action="/user-search" method="GET">
                                 @csrf
                                 <div class="input-group col-12 mt-2">
                                     <input type="text" name="search" class="form-control search-bar" id="search-bar"
@@ -60,21 +60,32 @@
                                     </div>
                                 </div>
                             </form>
+
                             <table id="" class="table table-bordered table-striped mt-2">
                                 <thead>
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
-                                        <th>Ovqat count</th>
+                                        <th>Faculties</th>
                                         <th>Options</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="">
                                     @foreach ($models as $model)
                                         <tr>
                                             <td>{{ $model->id }}</td>
                                             <td>{{ $model->name }}</td>
-                                            <td>{{ $model->ovqats->count() }}</td>
+                                            <td>
+
+                                                {{ $model->faculties->name }} -
+                                                @foreach ($universities as $university)
+                                                    @if($model->faculties->university_id == $university->id)
+                                                        {{ $university->name }}
+                                                    @endif
+                                                @endforeach
+
+
+                                            </td>
                                             <td>
                                                 <div class="d-flex">
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -95,10 +106,13 @@
                                                                         data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    Ovqatlar:<br>
-                                                                    @foreach ($model->ovqats as $item)
-                                                                        {{$item->name}}<br>
-                                                                    @endforeach
+                                                                    <li>Faculty name: {{ $model->faculties->name }} in
+                                                                        @foreach ($universities as $university)
+                                                                            @if($model->faculties->university_id == $university->id)
+                                                                                {{ $university->name }}
+                                                                            @endif
+                                                                        @endforeach
+                                                                    </li>
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
@@ -108,10 +122,10 @@
                                                         </div>
                                                     </div>
 
-                                                    <a href="/masalliq-update/{{$model->id}}"
+                                                    <a href="/major-update/{{$model->id}}"
                                                         class="btn btn-warning mx-2">Update</a>
 
-                                                    <form action="/masalliq/{{$model->id}}" method="POST">
+                                                    <form action="/major/{{$model->id}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">DELETE</button>
