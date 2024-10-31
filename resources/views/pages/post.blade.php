@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 
-@section('title', 'Major')
+@section('title', 'Post')
 
 @section('content')
 
@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Major</h1>
+                    <h1>Post</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Major</li>
+                        <li class="breadcrumb-item active">Post</li>
                     </ol>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <a href="/major-create" class="btn btn-primary">Create</a>
+                    <a href="/post-create" class="btn btn-primary">Create</a>
                     <div class="card mt-2">
 
                         <!-- /.card-header -->
@@ -65,8 +65,11 @@
                                 <thead>
                                     <tr>
                                         <th>Id</th>
-                                        <th>Name</th>
-                                        <th>Faculties</th>
+                                        <th>Title</th>
+                                        <th>Category</th>
+                                        <th>User</th>
+                                        <th>Text</th>
+                                        <th>Image</th>
                                         <th>Options</th>
                                     </tr>
                                 </thead>
@@ -74,18 +77,12 @@
                                     @foreach ($models as $model)
                                         <tr>
                                             <td>{{ $model->id }}</td>
-                                            <td>{{ $model->name }}</td>
-                                            <td>
+                                            <td>{{ $model->title }}</td>
+                                            <td>{{ $model->categories->name }}</td>
+                                            <td>{{ $model->users->name }}</td>
+                                            <td class="truncate-cell" >{{ $model->text }}</td>
+                                            <td><img src="{{$model->image}}" width="100px" alt=""></td>
 
-                                                {{ $model->faculties->name }} -
-                                                @foreach ($universities as $university)
-                                                    @if($model->faculties->university_id == $university->id)
-                                                        {{ $university->name }}
-                                                    @endif
-                                                @endforeach
-
-
-                                            </td>
                                             <td>
                                                 <div class="d-flex">
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -100,19 +97,17 @@
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
                                                                     <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                        {{$model->name}}
+                                                                        {{$model->title}}
                                                                     </h1>
                                                                     <button type="button" class="btn-close"
                                                                         data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <li>Faculty name: {{ $model->faculties->name }} in
-                                                                        @foreach ($universities as $university)
-                                                                            @if($model->faculties->university_id == $university->id)
-                                                                                {{ $university->name }}
-                                                                            @endif
-                                                                        @endforeach
-                                                                    </li>
+                                                                    <img src="{{ $model->image }}" width="100px" alt=""><br>
+                                                                    {{$model->text}}<br><br>
+                                                                    {{$model->categories->name}}<br>
+                                                                    {{$model->users->name}}
+
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
@@ -122,10 +117,10 @@
                                                         </div>
                                                     </div>
 
-                                                    <a href="/major-update/{{$model->id}}"
+                                                    <a href="/post-update/{{$model->id}}"
                                                         class="btn btn-warning mx-2">Update</a>
 
-                                                    <form action="/major/{{$model->id}}" method="POST">
+                                                    <form action="/post/{{$model->id}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">DELETE</button>

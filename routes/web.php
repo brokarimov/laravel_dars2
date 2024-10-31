@@ -1,59 +1,57 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\FacultyController;
+use App\Http\Controllers\GroupController;
 use App\Http\Controllers\MajorController;
 use App\Http\Controllers\MasalliqController;
 use App\Http\Controllers\OvqatController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\Product2Controller;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StatisticController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\User2Controller;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserPostController;
 use Illuminate\Support\Facades\Route;
-// admin
 
-Route::get('/', [UniversityController::class, 'index']);
-Route::get('/university-create', [UniversityController::class, 'create']);
-Route::post('/create-university', [UniversityController::class, 'store']);
-Route::delete('/university/{university}', [UniversityController::class, 'delete']);
-
-
-Route::get('/university-update/{university}', [UniversityController::class, 'update_university']);
-Route::put('/update/{university}', [UniversityController::class, 'update']);
+// Category
+Route::get('/', [CategoryController::class, 'index'])->middleware('auth');
+Route::get('/category-create', [CategoryController::class, 'create'])->middleware('auth');
+Route::post('/create-category', [CategoryController::class, 'store']);
+Route::delete('/category/{category}', [CategoryController::class, 'delete']);
+Route::get('/category-update/{category}', [CategoryController::class, 'update_category'])->middleware('auth');
+Route::put('/update/{category}', [CategoryController::class, 'update']);
 // Route::get('/ovqat-search', [OvqatController::class, 'search']);
 
 
+// Post
+Route::get('/posts', [PostController::class, 'index'])->middleware('auth');
+Route::get('/post-create', [PostController::class, 'create'])->middleware('auth');
+Route::post('/create-post', [PostController::class, 'store']);
+Route::delete('/post/{post}', [PostController::class, 'delete']);
+Route::get('/post-update/{post}', [PostController::class, 'update_post'])->middleware('auth');
+Route::put('/update_post/{post}', [PostController::class, 'update']);
 
-Route::get('/faculty', [FacultyController::class, 'index']);
-Route::get('/faculty-create', [FacultyController::class, 'create']);
-Route::post('/create-faculty', [FacultyController::class, 'store']);
-Route::delete('/faculty/{faculty}', [FacultyController::class, 'delete']);
-
-
-Route::get('/faculty-update/{faculty}', [FacultyController::class, 'update_faculty']);
-Route::put('/update_faculty/{faculty}', [FacultyController::class, 'update']);
-
-
-
-Route::get('/major', [MajorController::class, 'index']);
-Route::get('/major-create', [MajorController::class, 'create']);
-Route::post('/create-major', [MajorController::class, 'store']);
-Route::delete('/major/{major}', [MajorController::class, 'delete']);
+// User Page
+Route::get('/user-post', [UserPostController::class, 'index']);
 
 
-Route::get('/major-update/{major}', [MajorController::class, 'update_major']);
-Route::put('/update_major/{major}', [MajorController::class, 'update']);
+// Login and Register
 
 
+Route::get('/login', [AuthController::class, 'loginPage']);
+Route::post('/login', [AuthController::class, 'login']);
 
+Route::get('/register', [AuthController::class, 'registerPage']);
+Route::post('/register', [AuthController::class, 'register']);
 
-
-
-
+Route::post('/logout', [AuthController::class, 'logout']);
 
 
 

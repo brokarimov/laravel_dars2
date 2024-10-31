@@ -1,7 +1,7 @@
 @extends('layout.main')
 
 
-@section('title', 'Faculty')
+@section('title', 'Category')
 
 @section('content')
 
@@ -11,12 +11,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Faculty</h1>
+                    <h1>Category</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Faculty</li>
+                        <li class="breadcrumb-item active">Category</li>
                     </ol>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <a href="/faculty-create" class="btn btn-primary">Create</a>
+                    <a href="/category-create" class="btn btn-primary">Create</a>
                     <div class="card mt-2">
 
                         <!-- /.card-header -->
@@ -66,8 +66,8 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
-                                        <th>Universities</th>
                                         <th>Options</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody id="">
@@ -75,9 +75,6 @@
                                         <tr>
                                             <td>{{ $model->id }}</td>
                                             <td>{{ $model->name }}</td>
-                                            <td>
-                                                {{$model->universities->name}}
-                                            </td>
                                             <td>
                                                 <div class="d-flex">
                                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -98,7 +95,7 @@
                                                                         data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <li>University name: {{$model->universities->name}}</li>
+                                                                    
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-secondary"
@@ -108,10 +105,10 @@
                                                         </div>
                                                     </div>
 
-                                                    <a href="/faculty-update/{{$model->id}}"
+                                                    <a href="/category-update/{{$model->id}}"
                                                         class="btn btn-warning mx-2">Update</a>
 
-                                                    <form action="/faculty/{{$model->id}}" method="POST">
+                                                    <form action="/category/{{$model->id}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">DELETE</button>
