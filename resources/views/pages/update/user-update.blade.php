@@ -1,6 +1,6 @@
 @extends('layout.main')
 
-@section('title', 'Create')
+@section('title', 'Update')
 
 @section('content')
 <div class="content-wrapper">
@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Category Create</h1>
+                    <h1>User Update</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Category Create</li>
+                        <li class="breadcrumb-item active">User Update</li>
                     </ol>
                 </div>
             </div>
@@ -27,31 +27,33 @@
             <div class="row">
                 <!-- left column -->
                 <div class="col-md-12">
-                    <a href="/" class="btn btn-primary">Categories</a>
+
+                    <a href="/users" class="btn btn-primary">Users</a>
 
                     <!-- general form elements -->
                     <div class="card card-primary mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">Category Create</h3>
+                            <h3 class="card-title">User Update</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="/create-category" method="POST">
+                        <form action="/update_user/{{$user->id}}" method="POST" enctype="multipart/form-data">
+
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
+                                <h1>{{$user->name}}</h1>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Name</label>
-                                    <input type="text" name="name" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Enter name">
-                                    @error('name')
-                                        <span class="text-danger">
-                                            {{$message}}<br>
-                                        </span>
+                                    <label for="name">Role</label>
+                                    <input type="text" name="role" class="form-control" id="name"
+                                        placeholder="Enter role" value="{{ $user->role }}">
+                                    @error('role')
+                                        <span class="text-danger">{{ $message }}</span><br>
                                     @enderror
 
                                     
-                                </div>
 
+                                </div>
                             </div>
                             <!-- /.card-body -->
 

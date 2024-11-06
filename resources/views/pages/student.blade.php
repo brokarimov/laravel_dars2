@@ -1,7 +1,6 @@
 @extends('layout.main')
 
-
-@section('title', 'Category')
+@section('title', 'Student')
 
 @section('content')
 
@@ -11,12 +10,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Category</h1>
+                    <h1>Student</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Category</li>
+                        <li class="breadcrumb-item active">Student</li>
                     </ol>
                 </div>
             </div>
@@ -44,7 +43,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
-                    <a href="/category-create" class="btn btn-primary">Create</a>
+                    <a href="/student-create" class="btn btn-primary">Create</a>
                     <div class="card mt-2">
 
                         <!-- /.card-header -->
@@ -66,8 +65,10 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Name</th>
+                                        <th>Tel</th>
+                                        <th>Address</th>
+                                        <th>Image</th>
                                         <th>Options</th>
-                                        
                                     </tr>
                                 </thead>
                                 <tbody id="">
@@ -75,40 +76,20 @@
                                         <tr>
                                             <td>{{ $model->id }}</td>
                                             <td>{{ $model->name }}</td>
+                                            <td>{{ $model->tel }}</td>
+                                            <td>{{ $model->address }}</td>
+                                            <td><img src="{{ $model->image }}" width="100px" alt=""></td>
+
                                             <td>
                                                 <div class="d-flex">
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal{{$model->id}}">
-                                                        Show
-                                                    </button>
+                                                    <a href="/student-show/{{$model->id}}"
+                                                        class="btn btn-primary mx-2">Show</a>
 
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal{{$model->id}}" tabindex="-1"
-                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                        {{$model->name}}
-                                                                    </h1>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
 
-                                                    <a href="/category-update/{{$model->id}}"
+                                                    <a href="/student-update/{{$model->id}}"
                                                         class="btn btn-warning mx-2">Update</a>
 
-                                                    <form action="/category/{{$model->id}}" method="POST">
+                                                    <form action="/student/{{$model->id}}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">DELETE</button>

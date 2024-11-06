@@ -66,8 +66,7 @@
                                     <tr>
                                         <th>Id</th>
                                         <th>Title</th>
-                                        <th>Category</th>
-                                        <th>User</th>
+                                        <th>Description</th>
                                         <th>Text</th>
                                         <th>Image</th>
                                         <th>Options</th>
@@ -78,44 +77,14 @@
                                         <tr>
                                             <td>{{ $model->id }}</td>
                                             <td>{{ $model->title }}</td>
-                                            <td>{{ $model->categories->name }}</td>
-                                            <td>{{ $model->users->name }}</td>
-                                            <td class="truncate-cell" >{{ $model->text }}</td>
+                                            <td class="truncate-cell">{{ $model->description }}</td>
+                                            <td class="truncate-cell">{{ $model->text }}</td>
                                             <td><img src="{{$model->image}}" width="100px" alt=""></td>
 
                                             <td>
                                                 <div class="d-flex">
-                                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal{{$model->id}}">
-                                                        Show
-                                                    </button>
-
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal{{$model->id}}" tabindex="-1"
-                                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                                                        {{$model->title}}
-                                                                    </h1>
-                                                                    <button type="button" class="btn-close"
-                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <img src="{{ $model->image }}" width="100px" alt=""><br>
-                                                                    {{$model->text}}<br><br>
-                                                                    {{$model->categories->name}}<br>
-                                                                    {{$model->users->name}}
-
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                                    <a href="/post-show/{{$model->id}}"
+                                                        class="btn btn-primary mx-2">Show</a>
 
                                                     <a href="/post-update/{{$model->id}}"
                                                         class="btn btn-warning mx-2">Update</a>

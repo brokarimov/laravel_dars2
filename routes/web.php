@@ -17,35 +17,48 @@ use App\Http\Controllers\StudentController;
 use App\Http\Controllers\UniversityController;
 use App\Http\Controllers\User2Controller;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserPostController;
+use App\Http\Middleware\AdminCheck;
 use Illuminate\Support\Facades\Route;
 
-// Category
-Route::get('/', [CategoryController::class, 'index'])->middleware('auth');
-Route::get('/category-create', [CategoryController::class, 'create'])->middleware('auth');
-Route::post('/create-category', [CategoryController::class, 'store']);
-Route::delete('/category/{category}', [CategoryController::class, 'delete']);
-Route::get('/category-update/{category}', [CategoryController::class, 'update_category'])->middleware('auth');
-Route::put('/update/{category}', [CategoryController::class, 'update']);
-// Route::get('/ovqat-search', [OvqatController::class, 'search']);
+
+Route::middleware(AdminCheck::class . ':user,create,read,update,delete,admin')->group(function (): void {
+    Route::get('/', [StudentController::class, 'index'])->middleware('auth');
+    Route::get('/posts', [PostController::class, 'index'])->middleware('auth');
+
+});
+Route::middleware(AdminCheck::class . ':create,admin')->group(function (): void {
+    Route::get('/student-create', [StudentController::class, 'create'])->middleware('auth');
+    Route::post('/create-student', [StudentController::class, 'store']);
+
+    Route::get('/post-create', [PostController::class, 'create'])->middleware('auth');
+    Route::post('/create-post', [PostController::class, 'store']);
+
+});
+Route::middleware(AdminCheck::class . ':update,admin')->group(function (): void {
+    Route::get('/student-update/{student}', [StudentController::class, 'update_student'])->middleware('auth');
+    Route::put('/update/{student}', [StudentController::class, 'update']);
+
+    Route::get('/post-update/{post}', [PostController::class, 'update_post'])->middleware('auth');
+    Route::put('/update_post/{post}', [PostController::class, 'update']);
+});
 
 
 // Post
-Route::get('/posts', [PostController::class, 'index'])->middleware('auth');
-Route::get('/post-create', [PostController::class, 'create'])->middleware('auth');
-Route::post('/create-post', [PostController::class, 'store']);
-Route::delete('/post/{post}', [PostController::class, 'delete']);
-Route::get('/post-update/{post}', [PostController::class, 'update_post'])->middleware('auth');
-Route::put('/update_post/{post}', [PostController::class, 'update']);
+Route::middleware(AdminCheck::class . ':delete,admin')->group(function (): void {
+
+    Route::delete('/post/{post}', [PostController::class, 'delete']);
+    Route::delete('/student/{student}', [StudentController::class, 'delete']);
+
+});
+
 
 // User Page
 Route::get('/user-post', [UserPostController::class, 'index']);
 
-
 // Login and Register
-
-
-Route::get('/login', [AuthController::class, 'loginPage']);
+Route::get('/login', [AuthController::class, 'loginPage'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/register', [AuthController::class, 'registerPage']);
@@ -55,17 +68,18 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 
 
+Route::middleware(AdminCheck::class . ':admin')->group(function (): void {
+    Route::get('/users', [UserController::class, 'index']);
+    Route::get('/user-update/{user}', [UserController::class, 'update_user'])->middleware('auth');
+    Route::put('/update_user/{user}', [UserController::class, 'update']);
 
+});
 
+Route::middleware(AdminCheck::class . ':read,admin')->group(function (): void {
+    Route::get('/student-show/{student}', [StudentController::class, 'show']);
+    Route::get('/post-show/{post}', [PostController::class, 'show']);
 
-
-
-
-
-
-
-
-
+});
 
 
 

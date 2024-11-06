@@ -11,10 +11,10 @@ use App\Models\User;
 
 class UserController extends Controller
 {
-    public function users()
+    public function index()
     {
-        $users = User::orderBy('id', 'asc')->paginate(2);
-        return view('tables/users', ['users' => $users]);
+        $users = User::orderBy('id', 'asc')->paginate(5);
+        return view('pages.user', ['models' => $users]);
     }
 
     public function user_create()
@@ -44,14 +44,17 @@ class UserController extends Controller
     public function update_user(User $user)
     {
         // dd($user);
-        return view('tables.updatePages.user-update',['user'=>$user]);
+        return view('pages.update.user-update',['user'=>$user]);
     }
 
-    public function update(UserUpdateRequest $request, User $user)
+    public function update(Request $request, User $user)
     {
-        
-        $user->update($request->all());
-        return redirect('/')->with('warning', 'Ma\'lumot yangilandi!');
+        $request->validate([
+            'role' => 'required|max:255',
+        ]);    
+        $data = $request->all();
+        $user->update($data);
+        return redirect('/users')->with('warning', 'Ma\'lumot yangilandi!');
     }
 
     public function search(Request $request)

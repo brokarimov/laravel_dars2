@@ -9,12 +9,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Category Update</h1>
+                    <h1>Student Update</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Category Update</li>
+                        <li class="breadcrumb-item active">Student Update</li>
                     </ol>
                 </div>
             </div>
@@ -28,16 +28,16 @@
                 <!-- left column -->
                 <div class="col-md-12">
 
-                    <a href="/" class="btn btn-primary">Categories</a>
+                    <a href="/" class="btn btn-primary">Students</a>
 
                     <!-- general form elements -->
                     <div class="card card-primary mt-2">
                         <div class="card-header">
-                            <h3 class="card-title">Category Update</h3>
+                            <h3 class="card-title">Student Update</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-                        <form action="/update/{{$category->id}}" method="POST">
+                        <form action="/update/{{$student->id}}" method="POST" enctype="multipart/form-data">
 
                             @csrf
                             @method('PUT')
@@ -45,11 +45,32 @@
                                 <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" name="name" class="form-control" id="name"
-                                        placeholder="Enter name" value="{{ $category->name }}">
+                                        placeholder="Enter name" value="{{ $student->name }}">
                                     @error('name')
                                         <span class="text-danger">{{ $message }}</span><br>
                                     @enderror
 
+                                    <label for="name">Tel</label>
+                                    <input type="text" name="tel" class="form-control" id="name"
+                                        placeholder="Enter Tel" value="{{ $student->tel }}">
+                                    @error('tel')
+                                        <span class="text-danger">{{ $message }}</span><br>
+                                    @enderror
+
+                                    <label for="name">Address</label>
+                                    <input type="text" name="address" class="form-control" id="name"
+                                        placeholder="Enter address" value="{{ $student->address }}">
+                                    @error('address')
+                                        <span class="text-danger">{{ $message }}</span><br>
+                                    @enderror
+
+                                    <label for="exampleInputEmail1">Image</label>
+                                    <input type="file" name="image" class="form-control" id="exampleInputEmail1">
+                                    @error('image')
+                                        <span class="text-danger">
+                                            {{$message}}<br>
+                                        </span>
+                                    @enderror
                                     
                                 </div>
                             </div>

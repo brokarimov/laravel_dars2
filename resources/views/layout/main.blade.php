@@ -258,7 +258,16 @@
             <i class="fas fa-th-large"></i>
           </a>
         </li>
+        <li class="nav-item">
+          <form action="/logout" method="POST">
+            @csrf
+            <button class="btn btn-info" type="submit" class="nav-link">
+              logout
+            </button>
+          </form>
+        </li>
       </ul>
+
     </nav>
     <!-- /.navbar -->
     @yield('content')
@@ -307,7 +316,7 @@
               <a href="/" class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>
-                  Category
+                  Students
                   <span class="badge badge-info right"></span>
                 </p>
               </a>
@@ -322,16 +331,15 @@
               </a>
             </li>
             <li class="nav-item">
-              <form action="/logout" method="POST">
-                @csrf
-                <button type="submit" class="nav-link">
-                  <p>
-                    logout
-                  </p>
-                  <button>
-              </form>
-
+              <a href="/users" class="nav-link">
+                <i class="nav-icon far fa-calendar-alt"></i>
+                <p>
+                  Users
+                  <span class="badge badge-info right"></span>
+                </p>
+              </a>
             </li>
+
 
           </ul>
         </nav>

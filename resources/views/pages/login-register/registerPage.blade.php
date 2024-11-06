@@ -7,6 +7,8 @@
 
 <form action="/register" method="POST">
     @csrf
+    <h1 style="color:black" class="mt-2">Register Page</h1>
+
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Name</label>
         <input type="text" name="name" class="form-control" placeholder="Enter name">

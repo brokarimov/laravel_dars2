@@ -48,6 +48,14 @@
                                             {{$message}}<br>
                                         </span>
                                     @enderror
+                                    <label for="exampleInputEmail1">Description</label>
+                                    <input type="text" name="description" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Enter description">
+                                    @error('description')
+                                        <span class="text-danger">
+                                            {{$message}}<br>
+                                        </span>
+                                    @enderror
 
                                     <label for="exampleInputEmail1">Text</label>
                                     <input type="text" name="text" class="form-control" id="exampleInputEmail1"
@@ -66,19 +74,9 @@
                                         </span>
                                     @enderror
 
-                                    <label for="exampleInputEmail1">Category</label>
-                                    <select name="category_id" class="form-control">
-                                        @foreach ($categories as $category)
-                                            <option value="{{ $category->id }}">{{$category->name}}</option>
-                                        @endforeach
-                                    </select>
-                                    @error('category_id')
-                                        <span class="text-danger">
-                                            {{$message}}<br>
-                                        </span>
-                                    @enderror
+                                    
 
-                                    <input type="hidden" name="user_id" value="{{auth()->user()->id}}">
+                                    
 
                                 </div>
 
